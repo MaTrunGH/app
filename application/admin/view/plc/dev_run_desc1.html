@@ -1,0 +1,945 @@
+<!-- <html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <style type="text/css">
+    /*body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-family:"微软雅黑";}*/
+    #allmap{width:100%;height:500px;}
+    p{margin-left:5px; font-size:14px;}
+    .BMap_cpyCtrl { display:none; }
+        .anchorBL{ display:none; }
+  </style>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9vP7wDuMDhTXGKIk1sepMtRWuhYAf0L5"></script>
+  <title>地图单击事件</title>
+</head>
+<body>
+  <div id="allmap"></div>
+  <p>添加点击地图监听事件，点击地图后显示当前经纬度</p>
+</body>
+</html>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");
+  map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+  function showInfo(e){
+    alert(e.point.lng + ", " + e.point.lat);
+  }
+  map.addEventListener("click", showInfo);
+</script> -->
+
+<!-- <!DOCTYPE html>
+<html class="x-admin-sm">
+    <head>
+        <meta charset="UTF-8">
+        <title>城市空气质量控制系统</title>
+        <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+        <meta http-equiv="Cache-Control" content="no-siteapp" />
+        <link rel="stylesheet" href="/public/admin/css/font.css">
+        <link rel="stylesheet" href="/public/admin/css/xadmin.css">
+        <script src="/public/admin/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/public/admin/js/xadmin.js"></script>
+    </head>
+    <body>
+        <div class="layui-fluid">
+            <div class="layui-row">
+                <form class="layui-form">
+                  <div class="layui-form-item">
+                      <label for="username" class="layui-form-label">
+                          <span class="x-red">*</span>设备编号
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="username" name="username" required="" lay-verify="required"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>站点名
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>设备经度
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>设备纬度
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>控制模式
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>区域编号
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>区域名
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>气象编号
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="phone" class="layui-form-label">
+                          <span class="x-red">*</span>风向上限
+                      </label>
+                      <div class="layui-input-inline">
+                          <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                          autocomplete="off" class="layui-input">
+                      </div>
+                      <div class="layui-form-mid layui-word-aux">
+                          <span class="x-red">*</span>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label for="L_repass" class="layui-form-label">
+                      </label>
+                      <button  class="layui-btn" lay-filter="add" lay-submit="">
+                          增加
+                      </button>
+                  </div>
+              </form>
+            </div>
+        </div>
+        <script>layui.use(['form', 'layer'],
+            function() {
+                $ = layui.jquery;
+                var form = layui.form,
+                layer = layui.layer;
+
+                //自定义验证规则
+                form.verify({
+                    nikename: function(value) {
+                        if (value.length < 5) {
+                            return '昵称至少得5个字符啊';
+                        }
+                    },
+                    pass: [/(.+){6,12}$/, '密码必须6到12位'],
+                    repass: function(value) {
+                        if ($('#L_pass').val() != $('#L_repass').val()) {
+                            return '两次密码不一致';
+                        }
+                    }
+                });
+
+                //监听提交
+                form.on('submit(add)',
+                function(data) {
+                    console.log(data);
+                    //发异步，把数据提交给php
+                    layer.alert("增加成功", {
+                        icon: 6
+                    },
+                    function() {
+                        //关闭当前frame
+                        xadmin.close();
+
+                        // 可以对父窗口进行刷新 
+                        xadmin.father_reload();
+                    });
+                    return false;
+                });
+
+            });</script>
+        <script>var _hmt = _hmt || []; (function() {
+                var hm = document.createElement("script");
+                hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+                var s = document.getElementsByTagName("script")[0];
+                s.parentNode.insertBefore(hm, s);
+            })();</script>
+    </body>
+
+</html>
+ -->
+
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <style type="text/css">
+    body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-family:"微软雅黑";}
+    #allmap{width:100%;height:500px;}
+    p{margin-left:5px; font-size:14px;}
+    .BMap_cpyCtrl { display:none; }
+        .anchorBL{ display:none; }
+        .layui-adapt{ width:100px; }
+  </style>
+  <link rel="stylesheet" href="/public/admin/css/font.css">
+  <link rel="stylesheet" href="/public/admin/css/xadmin.css">
+  <script src="/public/admin/lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/public/admin/js/xadmin.js"></script>
+  <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9vP7wDuMDhTXGKIk1sepMtRWuhYAf0L5"></script> -->
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend style="font-size: 12px;">备注:红色表示停止或故障 绿色表示运行或正常</legend>
+</fieldset>
+ 
+<form class="layui-form" action="">
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">1#泵运行状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">故障状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">2#泵运行状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">故障状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">过滤泵运行状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">故障状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">增压泵运行状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">故障状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">进水阀开关状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">出水阀开关状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">泄水阀开关状态</label>
+      <div class="layui-input-inline">
+      	<span class="layui-btn layui-btn-normal" style="width: 100px;"></span>
+      </div>
+    </div>
+  </div>
+<script type="text/javascript">
+// 百度地图API功能
+var mp = new BMap.Map("allmap");
+var point = new BMap.Point(113.665556, 34.752539);
+mp.centerAndZoom(point, 14);
+mp.enableScrollWheelZoom();
+mp.enableInertialDragging();
+mp.enableContinuousZoom();
+
+//创建站点
+// var pt = new BMap.Point(113.665956, 34.765539);
+// var myIcon = new BMap.Icon("/public/admin/lib/layui/images/face/0.gif", new BMap.Size(300,157));
+// var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+// mp.addOverlay(marker2);// 将标注添加到地图中
+
+// 编写自定义函数,创建标注
+function addMarker(point){
+  var marker = new BMap.Marker(point);
+  mp.addOverlay(marker);
+}
+
+
+// // 随机向地图添加25个标注
+// var bounds = mp.getBounds();
+// var sw = bounds.getSouthWest();
+// var ne = bounds.getNorthEast();
+// var lngSpan = Math.abs(sw.lng - ne.lng);
+// var latSpan = Math.abs(ne.lat - sw.lat);
+// for (var i = 0; i < 25; i ++) {
+//   var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
+//   var myIcon = new BMap.Icon("/public/admin/lib/layui/images/face/0.gif", new BMap.Size(300,157));
+//   addMarker(point,{icon:myIcon});
+// }
+
+
+var navigationControl = new BMap.NavigationControl({
+  anchor: BMAP_ANCHOR_TOP_RIGHT,
+  type: BMAP_NAVIGATION_CONTROL_LARGE,
+  enableGeolocation: true
+});
+mp.addControl(navigationControl);
+
+// var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+// var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+// var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT}); 
+// mp.addControl(top_right_navigation);
+
+// 添加定位控件
+// var geolocationControl = new BMap.GeolocationControl();
+// geolocationControl.addEventListener("locationSuccess", function(e){
+//   // 定位成功事件
+//   var address = '';
+//   address += e.addressComponent.province;
+//   address += e.addressComponent.city;
+//   address += e.addressComponent.district;
+//   address += e.addressComponent.street;
+//   address += e.addressComponent.streetNumber;
+//   alert('当前定位');
+// });
+// geolocationControl.addEventListener("locationError",function(e){
+//   alert(e.message);
+// });
+// mp.addControl(geolocationControl);
+
+
+var size = new BMap.Size(10, 20);
+mp.addControl(new BMap.CityListControl({
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    offset: size,
+    // 切换城市之间事件
+    // onChangeBefore: function(){
+    //    alert('before');
+    // },
+    // 切换城市之后事件
+    // onChangeAfter:function(){
+    //   alert('after');
+    // }
+}));
+
+function initLocation(){
+  var geolocation = new BMap.Geolocation();
+  geolocation.getCurrentPosition(function(r){
+    if(this.getStatus() == BMAP_STATUS_SUCCESS){
+      var mk = new BMap.Marker(r.point);
+      mp.addOverlay(mk);
+      mp.panTo(r.point);
+    }
+    else {
+      alert('failed'+this.getStatus());
+    }
+  },{enableHighAccuracy: true});
+}
+
+initLocation();
+
+mp.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+function showInfo(e){
+  // mp.removeOverlay();
+  mp.clearOverlays();
+  point = new BMap.Point(e.point.lng, e.point.lat);
+  var marker = new BMap.Marker(point);
+  mp.addOverlay(marker);
+  mp.panTo(point);
+$("input[name='lon']").val(e.point.lng);
+$("input[name='lat']").val(e.point.lat);
+}
+mp.addEventListener("click", showInfo);
+
+</script>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+        <label class="layui-form-label">选择气象仪</label>
+        <div class="layui-input-inline">
+          <select name="modules" lay-search="" lay-verify="required">
+            <option value="">直接选择或搜索选择</option>
+          </select>
+        </div>
+      </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">模式</label>
+        <div class="layui-input-block">
+          <input name="model" title="智能" type="radio" checked="" value="2">
+          <input name="model" title="手动" type="radio" value="0">
+          <input name="model" title="定时" type="radio" value="1">
+    </div>
+  </div>
+  </div>
+
+  <!-- <div class="layui-form-item">
+    <label class="layui-form-label">设备名</label>
+    <div class="layui-input-block">
+      <input name="title" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">验证必填项</label>
+    <div class="layui-input-block">
+      <input name="username" class="layui-input" type="text" placeholder="请输入" autocomplete="off" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">验证手机</label>
+      <div class="layui-input-inline">
+        <input name="phone" class="layui-input" type="tel" autocomplete="off" lay-verify="required|phone">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">验证邮箱</label>
+      <div class="layui-input-inline">
+        <input name="email" class="layui-input" type="text" autocomplete="off" lay-verify="email">
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">多规则验证</label>
+      <div class="layui-input-inline">
+        <input name="number" class="layui-input" type="text" autocomplete="off" lay-verify="required|number">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">验证日期</label>
+      <div class="layui-input-inline">
+        <input name="date" class="layui-input" id="date" type="text" placeholder="yyyy-MM-dd" autocomplete="off" lay-verify="date">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">验证链接</label>
+      <div class="layui-input-inline">
+        <input name="url" class="layui-input" type="tel" autocomplete="off" lay-verify="url">
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">验证身份证</label>
+    <div class="layui-input-block">
+      <input name="identity" class="layui-input" type="text" placeholder="" autocomplete="off" lay-verify="identity">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">自定义验证</label>
+    <div class="layui-input-inline">
+      <input name="password" class="layui-input" type="password" placeholder="请输入密码" autocomplete="off" lay-verify="pass">
+    </div>
+    <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">范围</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input name="price_min" class="layui-input" type="text" placeholder="￥" autocomplete="off">
+      </div>
+      <div class="layui-form-mid">-</div>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input name="price_max" class="layui-input" type="text" placeholder="￥" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">单行选择框</label>
+    <div class="layui-input-block">
+      <select name="interest" lay-filter="aihao">
+        <option value=""></option>
+        <option value="0">写作</option>
+        <option value="1" selected="">阅读</option>
+        <option value="2">游戏</option>
+        <option value="3">音乐</option>
+        <option value="4">旅行</option>
+      </select>
+    </div>
+  </div>
+  
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">分组选择框</label>
+      <div class="layui-input-inline">
+        <select name="quiz">
+          <option value="">请选择问题</option>
+          <optgroup label="城市记忆">
+            <option value="你工作的第一个城市">你工作的第一个城市</option>
+          </optgroup>
+          <optgroup label="学生时代">
+            <option value="你的工号">你的工号</option>
+            <option value="你最喜欢的老师">你最喜欢的老师</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">搜索选择框</label>
+      <div class="layui-input-inline">
+        <select name="modules" lay-search="" lay-verify="required">
+          <option value="">直接选择或搜索选择</option>
+          <option value="1">layer</option>
+          <option value="2">form</option>
+          <option value="3">layim</option>
+          <option value="4">element</option>
+          <option value="5">laytpl</option>
+          <option value="6">upload</option>
+          <option value="7">laydate</option>
+          <option value="8">laypage</option>
+          <option value="9">flow</option>
+          <option value="10">util</option>
+          <option value="11">code</option>
+          <option value="12">tree</option>
+          <option value="13">layedit</option>
+          <option value="14">nav</option>
+          <option value="15">tab</option>
+          <option value="16">table</option>
+          <option value="17">select</option>
+          <option value="18">checkbox</option>
+          <option value="19">switch</option>
+          <option value="20">radio</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">联动选择框</label>
+    <div class="layui-input-inline">
+      <select name="quiz1">
+        <option value="">请选择省</option>
+        <option value="浙江" selected="">浙江省</option>
+        <option value="你的工号">江西省</option>
+        <option value="你最喜欢的老师">福建省</option>
+      </select>
+    </div>
+    <div class="layui-input-inline">
+      <select name="quiz2">
+        <option value="">请选择市</option>
+        <option value="杭州">杭州</option>
+        <option disabled="" value="宁波">宁波</option>
+        <option value="温州">温州</option>
+        <option value="温州">台州</option>
+        <option value="温州">绍兴</option>
+      </select>
+    </div>
+    <div class="layui-input-inline">
+      <select name="quiz3">
+        <option value="">请选择县/区</option>
+        <option value="西湖区">西湖区</option>
+        <option value="余杭区">余杭区</option>
+        <option value="拱墅区">临安市</option>
+      </select>
+    </div>
+    <div class="layui-form-mid layui-word-aux">此处只是演示联动排版，并未做联动交互</div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">复选框</label>
+    <div class="layui-input-block">
+      <input name="like[write]" title="写作" type="checkbox">
+      <input name="like[read]" title="阅读" type="checkbox" checked="">
+      <input name="like[game]" title="游戏" type="checkbox">
+    </div>
+  </div>
+  
+  <div class="layui-form-item" pane="">
+    <label class="layui-form-label">原始复选框</label>
+    <div class="layui-input-block">
+      <input name="like1[write]" title="写作" type="checkbox" checked="" lay-skin="primary">
+      <input name="like1[read]" title="阅读" type="checkbox" lay-skin="primary">
+      <input name="like1[game]" title="游戏" disabled="" type="checkbox" lay-skin="primary">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">开关-默认关</label>
+    <div class="layui-input-block">
+      <input name="close" type="checkbox" lay-skin="switch" lay-text="ON|OFF">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">开关-默认开</label>
+    <div class="layui-input-block">
+      <input name="open" type="checkbox" checked="" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">单选框</label>
+    <div class="layui-input-block">
+      <input name="sex" title="男" type="radio" checked="" value="男">
+      <input name="sex" title="女" type="radio" value="女">
+      <input name="sex" title="禁用" disabled="" type="radio" value="禁">
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">普通文本域</label>
+    <div class="layui-input-block">
+      <textarea class="layui-textarea" placeholder="请输入内容"></textarea>
+    </div>
+  </div> -->
+  <!--<div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">编辑器</label>
+    <div class="layui-input-block">
+      <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="LAY_demo_editor"></textarea>
+    </div>
+  </div>-->
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" type="submit" lay-filter="demo1" lay-submit="">立即提交</button>
+      <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+    </div>
+  </div>
+</form>
+ 
+<!-- 示例-970 -->
+<ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px" data-ad-slot="3820120620" data-ad-client="ca-pub-6111334333458862"></ins>
+  
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+  <legend>赋值和取值</legend>
+</fieldset>
+ 
+<form class="layui-form" action="" lay-filter="example">
+  <div class="layui-form-item">
+    <label class="layui-form-label">输入框</label>
+    <div class="layui-input-block">
+      <input name="username" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off" lay-verify="title">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码框</label>
+    <div class="layui-input-block">
+      <input name="password" class="layui-input" type="password" placeholder="请输入密码" autocomplete="off">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">选择框</label>
+    <div class="layui-input-block">
+      <select name="interest" lay-filter="aihao">
+        <option value=""></option>
+        <option value="0">写作</option>
+        <option value="1">阅读</option>
+        <option value="2">游戏</option>
+        <option value="3">音乐</option>
+        <option value="4">旅行</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">复选框</label>
+    <div class="layui-input-block">
+      <input name="like[write]" title="写作" type="checkbox">
+      <input name="like[read]" title="阅读" type="checkbox">
+      <input name="like[daze]" title="发呆" type="checkbox">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">开关</label>
+    <div class="layui-input-block">
+      <input name="close" type="checkbox" lay-skin="switch" lay-text="ON|OFF">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">单选框</label>
+    <div class="layui-input-block">
+      <input name="sex" title="男" type="radio" checked="" value="男">
+      <input name="sex" title="女" type="radio" value="女">
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">文本域</label>
+    <div class="layui-input-block">
+      <textarea name="desc" class="layui-textarea" placeholder="请输入内容"></textarea>
+    </div>
+  </div>
+ 
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn layui-btn-normal" id="LAY-component-form-setval" type="button">赋值</button>
+      <button class="layui-btn layui-btn-normal" id="LAY-component-form-getval" type="button">取值</button>
+      <button class="layui-btn" type="submit" lay-filter="demo1" lay-submit="">立即提交</button>
+    </div>
+  </div>
+</form>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+  <legend>方框风格的表单集合</legend>
+</fieldset>
+<form class="layui-form layui-form-pane" action="">
+  <div class="layui-form-item">
+    <label class="layui-form-label">长输入框</label>
+    <div class="layui-input-block">
+      <input name="title" class="layui-input" type="text" placeholder="请输入标题" autocomplete="off">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">短输入框</label>
+    <div class="layui-input-inline">
+      <input name="username" class="layui-input" type="text" placeholder="请输入" autocomplete="off" lay-verify="required">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">日期选择</label>
+      <div class="layui-input-block">
+        <input name="date" class="layui-input" id="date1" type="text" autocomplete="off">
+      </div>
+    </div>
+    <div class="layui-inline">
+      <label class="layui-form-label">行内表单</label>
+      <div class="layui-input-inline">
+        <input name="number" class="layui-input" type="text" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-inline">
+      <input name="password" class="layui-input" type="password" placeholder="请输入密码" autocomplete="off">
+    </div>
+    <div class="layui-form-mid layui-word-aux">请务必填写用户名</div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">范围</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input name="price_min" class="layui-input" type="text" placeholder="￥" autocomplete="off">
+      </div>
+      <div class="layui-form-mid">-</div>
+      <div class="layui-input-inline" style="width: 100px;">
+        <input name="price_max" class="layui-input" type="text" placeholder="￥" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">单行选择框</label>
+    <div class="layui-input-block">
+      <select name="interest" lay-filter="aihao">
+        <option value=""></option>
+        <option value="0">写作</option>
+        <option value="1" selected="">阅读</option>
+        <option value="2">游戏</option>
+        <option value="3">音乐</option>
+        <option value="4">旅行</option>
+      </select>
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <label class="layui-form-label">行内选择框</label>
+    <div class="layui-input-inline">
+      <select name="quiz1">
+        <option value="">请选择省</option>
+        <option value="浙江" selected="">浙江省</option>
+        <option value="你的工号">江西省</option>
+        <option value="你最喜欢的老师">福建省</option>
+      </select>
+    </div>
+    <div class="layui-input-inline">
+      <select name="quiz2">
+        <option value="">请选择市</option>
+        <option value="杭州">杭州</option>
+        <option disabled="" value="宁波">宁波</option>
+        <option value="温州">温州</option>
+        <option value="温州">台州</option>
+        <option value="温州">绍兴</option>
+      </select>
+    </div>
+    <div class="layui-input-inline">
+      <select name="quiz3">
+        <option value="">请选择县/区</option>
+        <option value="西湖区">西湖区</option>
+        <option value="余杭区">余杭区</option>
+        <option value="拱墅区">临安市</option>
+      </select>
+    </div>
+  </div>
+  <div class="layui-form-item" pane="">
+    <label class="layui-form-label">开关-开</label>
+    <div class="layui-input-block">
+      <input name="open" title="开关" type="checkbox" checked="" lay-skin="switch" lay-filter="switchTest">
+    </div>
+  </div>
+  <div class="layui-form-item" pane="">
+    <label class="layui-form-label">单选框</label>
+    <div class="layui-input-block">
+      <input name="sex" title="男" type="radio" checked="" value="男">
+      <input name="sex" title="女" type="radio" value="女">
+      <input name="sex" title="禁用" disabled="" type="radio" value="禁">
+    </div>
+  </div>
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">文本域</label>
+    <div class="layui-input-block">
+      <textarea class="layui-textarea" placeholder="请输入内容"></textarea>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <button class="layui-btn" lay-filter="demo2" lay-submit="">跳转式提交</button>
+  </div>
+</form>
+          
+<!-- <script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script> -->
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+  
+  //日期
+  laydate.render({
+    elem: '#date'
+  });
+  laydate.render({
+    elem: '#date1'
+  });
+  
+  //创建一个编辑器
+  var editIndex = layedit.build('LAY_demo_editor');
+ 
+  //自定义验证规则
+  form.verify({
+    title: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    ,pass: [
+      /^[\S]{6,12}$/
+      ,'密码必须6到12位，且不能出现空格'
+    ]
+    ,content: function(value){
+      layedit.sync(editIndex);
+    }
+  });
+  
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+  
+  //监听提交
+  form.on('submit(demo1)', function(data){
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    return false;
+  });
+ 
+  //表单赋值
+  layui.$('#LAY-component-form-setval').on('click', function(){
+    form.val('example', {
+      "username": "贤心" // "name": "value"
+      ,"password": "123456"
+      ,"interest": 1
+      ,"like[write]": true //复选框选中状态
+      ,"close": true //开关状态
+      ,"sex": "女"
+      ,"desc": "我爱 layui"
+    });
+  });
+  
+  //表单取值
+  layui.$('#LAY-component-form-getval').on('click', function(){
+    var data = form.val('example');
+    alert(JSON.stringify(data));
+  });
+  
+});
+</script>
+
+</body>
+</html>

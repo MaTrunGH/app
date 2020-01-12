@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<button onclick="open()">open</button>
+	<button onclick="clsoe()">close</button>
+</body>
+<script src="/public/admin/js/jquery.min.js"></script>
+<script type="text/javascript">
+
+	var url ='{:url("admi/test/test")}'
+	function open(){
+		$.ajax({
+			url:,
+			data:,
+			type:'post',
+			dataType:'json',
+			success:function($res){
+
+			}
+		});
+	}
+
+	function close(){
+		$.ajax({
+			url:,
+			data:,
+			type:'post',
+			dataType:'json',
+			success:function($res){
+				
+			}
+		});
+	}
+</script>
+</html>

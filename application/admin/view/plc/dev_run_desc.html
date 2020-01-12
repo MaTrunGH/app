@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="widtd=device-widtd, initial-scale=1, maximum-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="/public/admin/css/font.css">
+  <link rel="stylesheet" href="/public/admin/css/xadmin.css">
+  <script src="/public/admin/lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/public/admin/js/xadmin.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-row layui-col-space5">
+	<form class="layui-form">
+	<div class="layui-col-md12">
+        <table  class="layui-table" style="text-align: center;border: 0;">
+        	<tr>
+        		<td colspan="8"><b>智控设备运行状态</b></td>
+        	</tr>
+        	<tr>
+        		<td>1#泵运行状态</td>
+        		<td>1#泵故障状态</td>
+        		<td>1#泵累计运行时间</td>
+        		<td>1#泵电流(A)</td>
+        		<td>2#泵运行状态</td>
+        		<td>2#泵故障状态</td>
+        		<td>2#泵累计运行时间</td>
+        		<td>2#泵电流(A)</td>
+        	</tr>
+        	<tr>
+        		<td>{$param.pmls?'<span style="color:green;">运行</span>':'<span style="color:red;">停止</span>'}</td>
+        		<td>{$param.pmlf?'<span style="color:red;">故障</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.p1arth}</td>
+        		<td>{$param.p1c}</td>
+        		<td>{$param.pm2s?'<span style="color:green;">运行</span>':'<span style="color:red;">停止</span>'}</td>
+        		<td>{$param.pm2f?'<span style="color:red;">故障</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.p2arth}</td>
+        		<td>{$param.p2c}</td>
+        	</tr>
+        	<tr>
+        		<td>水压(mpa)</td>
+        		<td>压力超高</td>
+        		<td>进水压力超低</td>
+        		<td>浸水报警</td>
+        		<td>逆风报警</td>
+        		<td>液位(m)</td>
+        		<td>机房温度</td>
+        		<td>室外温度</td>
+        	</tr>
+        	<tr>
+        		<td>{$param.pv}</td>
+        		<td>{$param.vph?'<span style="color:red;">越限</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.ivpl?'<span style="color:red;">越限</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.swa?'<span style="color:red;background-color: red;">  </span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.dwa?'<span style="color:red;background-color: red;">  </span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.llv}</td>
+        		<td>{$param.mrt}</td>
+        		<td>{$param.mrot}</td>
+        	</tr>
+
+        	<tr>
+        		<td>室温温度上限设定</td>
+        		<td>室温温度下限设定</td>
+        		<td>户外温度上限设定(mpa)</td>
+        		<td>户外温度下限设定</td>
+        		<td>风向设定1A</td>
+        		<td>风向设定1B</td>
+        		<td>风向设定2A</td>
+        		<td>风向设定2B</td>
+        	</tr>
+        	<tr>
+        		<td>{$param.ituls}</td>
+        		<td>{$param.itdls}</td>
+        		<td>{$param.otuls}</td>
+        		<td>{$param.otdls}</td>
+        		<td>{$param.wdir1a}</td>
+        		<td>{$param.wdir1b}</td>
+        		<td>{$param.wdir2a}</td>
+        		<td>{$param.wdir2a}</td>
+        	</tr>
+        	<tr>
+        		<td>风速设定</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>{$param.wss}</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        </table>
+
+    <table  class="layui-table" style="text-align: center;border: 0;">
+        	<tr>
+        		<td colspan="8"><b>气象设备运行状态</b></td>
+        	</tr>
+        	<tr>
+        		<td>pm2.5</td>
+        		<td>pm10</td>
+        		<td>风向</td>
+        		<td>风速</td>
+        		<td>温度</td>
+        		<td>湿度</td>
+        		<td>雨量</td>
+        		<td>负离子</td>
+        	</tr>
+        	<tr>
+        		<td>{$wea_run_param.pm2_5}</td>
+        		<td>{$wea_run_param.pm10}</td>
+        		<td>{$wea_run_param.angle}</td>
+        		<td>{$wea_run_param.speed}</td>
+        		<td>{$wea_run_param.temp}</td>
+        		<td>{$wea_run_param.rh}</td>
+        		<td>{$wea_run_param.rain}</td>
+        		<td>{$wea_run_param.anion}</td>
+        	</tr>
+        	<tr>
+        		<td>水压(mpa)</td>
+        		<td>压力超高</td>
+        		<td>进水压力超低</td>
+        		<td>浸水报警</td>
+        		<td>逆风报警</td>
+        		<td>液位(m)</td>
+        		<td>机房温度</td>
+        		<td>室外温度</td>
+        	</tr>
+        	<tr>
+        		<td>{$param.pv}</td>
+        		<td>{$param.vph?'<span style="color:red;">越限</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.ivpl?'<span style="color:red;">越限</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.swa?'<span style="color:red;background-color: red;">  </span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.dwa?'<span style="color:red;background-color: red;">  </span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$param.llv}</td>
+        		<td>{$param.mrt}</td>
+        		<td>{$param.mrot}</td>
+        	</tr>
+<!-- 
+        	<tr>
+        		<td>室温温度上限设定</td>
+        		<td>室温温度下限设定</td>
+        		<td>户外温度上限设定(mpa)</td>
+        		<td>户外温度下限设定</td>
+        		<td>风向设定1A</td>
+        		<td>风向设定1B</td>
+        		<td>风向设定2A</td>
+        		<td>风向设定2B</td>
+        	</tr>
+        	<tr>
+        		<td>{$param.ituls}</td>
+        		<td>{$param.itdls}</td>
+        		<td>{$param.otuls}</td>
+        		<td>{$param.otdls}</td>
+        		<td>{$param.wdir1a}</td>
+        		<td>{$param.wdir1b}</td>
+        		<td>{$param.wdir2a}</td>
+        		<td>{$param.wdir2a}</td>
+        	</tr>
+        	<tr>
+        		<td>风速设定</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+        	<tr>
+        		<td>{$param.wss}</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr> -->
+        </table>
+
+        <table  class="layui-table" style="text-align: center;border: 0;">
+        	<!-- <tr>
+        		<td colspan="8"><b>操作</b></td>
+        	</tr> -->
+        	<tr>
+        		<td>1#泵</td>
+        		<td>2#泵</td>
+        		<td>1#终端</td>
+        		<td>2#终端</td>
+        		<td>进水阀</td>
+        		<td>出水阀</td>
+        		<td>增压泵</td>
+        		<td>过滤泵</td>
+        	</tr>
+        	<tr>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="rm" title="启动/运行" type="checkbox" lay-skin="switch" lay-filter="rm"></td>
+        		<td><input name="rm" title="启动/运行" type="checkbox" lay-skin="switch" lay-filter="rm"></td>
+        	</tr>
+        	<tr>
+        		<td>故障复位</td>
+        		<td>1#泵累计时间清零</td>
+        		<td>2#泵累计时间清零</td>
+        		<td>设置时钟</td>
+        		<td>禁用系统</td>
+        		<td>一键启动</td>
+        		<td>急停</td>
+        		<td>当前运行模式</td>
+        	</tr>
+        	<tr>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="aks" title="开/关" type="checkbox" checked="" lay-skin="switch" lay-filter="aks"></td>
+        		<td><input name="rm" title="启动/运行" type="checkbox" lay-skin="switch" lay-filter="rm"></td>
+        		<td><input name="model" title="智能" type="radio" checked="" value="2">
+		          <input name="model" title="手动" type="radio" value="0">
+		          <input name="model" title="定时" type="radio" value="1"></td>
+        	</tr>
+        </table>
+  </div>
+  </form>
+<!--   <div class="layui-col-md12">
+      <div class="layui-col-md6">
+      	1#泵
+        <table  class="layui-table">
+        	<tr>
+        		<td>运行状态</td>
+        		<td>故障状态</td>
+        		<td>累计运行时间</td>
+        		<td>运行电流(A)</td>
+        	</tr>
+        	<tr>
+        		<td>1</td>
+        		<td>1</td>
+        		<td>1</td>
+        		<td>1</td>
+        	</tr>
+        </table>
+      </div>
+      <div class="layui-col-md6">
+        2#泵
+        <table  class="layui-table">
+        	<tr>
+        		<td>运行状态</td>
+        		<td>故障状态</td>
+        		<td>累计运行时间</td>
+        		<td>运行电流(A)</td>
+        	</tr>
+        	<tr>
+        		<td>1</td>
+        		<td>1</td>
+        		<td>1</td>
+        		<td>1</td>
+        	</tr>
+        </table>
+      </div>
+  </div> -->
+
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+	layui.use(['form', 'layedit', 'laydate'], function(){
+	  var form = layui.form
+	  ,layer = layui.layer
+	  ,layedit = layui.layedit
+	  ,laydate = layui.laydate;
+
+  //监听指定开关
+  form.on('switch(aks)', function(data){
+  });
+  form.on('switch(rm)', function(data){
+  });
+});
+</script>
+</html>

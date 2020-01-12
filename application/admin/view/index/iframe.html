@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
+        .BMap_cpyCtrl { display:none; }
+        .anchorBL{ display:none; }
+    </style>
+    <link rel="stylesheet" href="/public/admin/lib/layui/css/layui.css"  media="all">
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=9vP7wDuMDhTXGKIk1sepMtRWuhYAf0L5"></script>
+    <title>设备概况</title>
+</head>
+<body>
+		<div id="city" style="width: 12%;float: left;"><div class="demo-tree demo-tree-box" id="region"></div></div>
+		<div id="allmap" style="width: 88%;float: left;border: 1"></div>
+    <input type="hidden" name="data" value="{$region_info}">
+</body>
+</html>
+<script src="/public/admin//lib/layui/layui.js" charset="utf-8"></script>  
+<script type="text/javascript">
+var mp = new BMap.Map("allmap");
+var point = new BMap.Point(113.665556, 34.752539);
+mp.centerAndZoom(point, 14);
+mp.enableScrollWheelZoom();
+mp.enableInertialDragging();
+mp.enableContinuousZoom();
+
+//创建站点
+// var pt = new BMap.Point(113.665956, 34.765539);
+// var myIcon = new BMap.Icon("/public/admin/lib/layui/images/face/0.gif", new BMap.Size(300,157));
+// var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+// mp.addOverlay(marker2);// 将标注添加到地图中
+
+// 编写自定义函数,创建标注
+function addMarker(point){
+  var marker = new BMap.Marker(point);
+  marker.setTitle('plc');
+  marker.devId = 101;
+  marker.devName = '创业大厦';
+  // marker.setIcon('/public/admin/lib/layui/images/face/0.gif');
+  mp.addOverlay(marker);
+  marker.addEventListener("click",devDesc);
+}
+
+function devDesc(e){
+  // console.log(e.target.devId);
+  var dev_id = e.target.devId;
+  var title = e.target.devName;
+  // var w = 500;
+  // var h = 500;
+  // var full = true;
+  // var url = '{:url("admin/plc/devRunDesc", ["dev_id='+dev_id+'"])}';
+  var url = '/public/index.php/admin/plc/devrundesc?dev_id='+dev_id;
+  console.log(url);
+  var index = layer.open({
+        type: 2,
+        area: ['100%', 500 +'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shadeClose: true,
+        shade:0.4,
+        title: title,
+          content: url
+    });
+    if(full){
+       layer.full(index); 
+    }
+}
+
+// 随机向地图添加25个标注
+var bounds = mp.getBounds();
+var sw = bounds.getSouthWest();
+var ne = bounds.getNorthEast();
+var lngSpan = Math.abs(sw.lng - ne.lng);
+var latSpan = Math.abs(ne.lat - sw.lat);
+for (var i = 0; i < 25; i ++) {
+  var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
+  var myIcon = new BMap.Icon("/public/admin/lib/layui/images/face/0.gif", new BMap.Size(300,157));
+  addMarker(point);
+}
+
+var navigationControl = new BMap.NavigationControl({
+  anchor: BMAP_ANCHOR_TOP_RIGHT,
+  type: BMAP_NAVIGATION_CONTROL_LARGE,
+  enableGeolocation: true
+});
+mp.addControl(navigationControl);
+
+// var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+// var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+// var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT}); 
+// mp.addControl(top_right_navigation);
+
+// 添加定位控件
+var geolocationControl = new BMap.GeolocationControl();
+geolocationControl.addEventListener("locationSuccess", function(e){
+  // 定位成功事件
+  var address = '';
+  address += e.addressComponent.province;
+  address += e.addressComponent.city;
+  address += e.addressComponent.district;
+  address += e.addressComponent.street;
+  address += e.addressComponent.streetNumber;
+});
+geolocationControl.addEventListener("locationError",function(e){
+  alert(e.message);
+});
+mp.addControl(geolocationControl);
+
+
+var size = new BMap.Size(10, 20);
+mp.addControl(new BMap.CityListControl({
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    offset: size,
+    // 切换城市之间事件
+    // onChangeBefore: function(){
+    //    alert('before');
+    // },
+    // 切换城市之后事件
+    // onChangeAfter:function(){
+    //   alert('after');
+    // }
+}));
+
+var geolocation = new BMap.Geolocation();
+geolocation.getCurrentPosition(function(r){
+	if(this.getStatus() == BMAP_STATUS_SUCCESS){
+		var mk = new BMap.Marker(r.point);
+		mp.addOverlay(mk);
+		mp.panTo(r.point);
+	}
+	else {
+		alert('failed'+this.getStatus());
+	}        
+},{enableHighAccuracy: true});
+
+var ss = document.getElementsByName('data')[0].value;
+layui.use(['tree', 'util'], function(){
+  var tree = layui.tree
+  ,layer = layui.layer
+  ,util = layui.util
+  data = JSON.parse(ss);
+
+  //按钮事件
+  util.event('lay-demo', {
+    getChecked: function(othis){
+      var checkedData = tree.getChecked('demoId1'); //获取选中节点的数据
+      
+      layer.alert(JSON.stringify(checkedData), {shade:0});
+      console.log(checkedData);
+    }
+    ,setChecked: function(){
+      tree.setChecked('demoId1', [12, 16]); //勾选指定节点
+    }
+    ,reload: function(){
+      //重载实例
+      tree.reload('demoId1', {
+        
+      });
+    }
+  });
+  
+  tree.render({
+    elem: '#region' //默认是点击节点可进行收缩
+    ,data: data
+    ,click:function(obj){
+      if (!obj.data.hasOwnProperty('children')){
+        // mp.clearOverlays();
+        point = new BMap.Point(obj.data.lon, obj.data.lat);
+        // var marker = new BMap.Marker(point);
+        // mp.addOverlay(marker);
+        mp.panTo(point);
+      }
+    }
+  });
+
+});
+</script>

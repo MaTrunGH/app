@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="widtd=device-widtd, initial-scale=1, maximum-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="/public/admin/css/font.css">
+  <link rel="stylesheet" href="/public/admin/css/xadmin.css">
+  <script src="/public/admin/lib/layui/layui.js" charset="utf-8"></script>
+  <script type="text/javascript" src="/public/admin/js/xadmin.js"></script>
+</head>
+<body class="layui-layout-body">
+<div class="layui-row layui-col-space5">
+	<div class="layui-col-md12">
+        <table class="layui-table" id="table" lay-size="sm" style="width: auto;text-align: center;border: 0;overflow: scroll;">
+        	<tr>
+        		<td colspan="24"><b>智控设备运行日志</b></td>
+        	</tr>
+        	<tr>
+                <td>时间</td>
+        		<td>1#泵运行状态</td>
+        		<td>1#泵故障状态</td>
+        		<td>1#泵累计运行时间</td>
+        		<td>1#泵电流(A)</td>
+        		<td>2#泵运行状态</td>
+        		<td>2#泵故障状态</td>
+        		<td>2#泵累计运行时间</td>
+        		<td>2#泵电流(A)</td>
+        	
+        		<td>水压(mpa)</td>
+        		<td>压力超高</td>
+        		<td>进水压力超低</td>
+        		<td>浸水报警</td>
+        		<td>逆风报警</td>
+        		<td>液位(m)</td>
+        		<td>机房温度</td>
+        		<td>室外温度</td>
+        	
+        		<td>室温温度上限设定</td>
+        		<td>室温温度下限设定</td>
+        		<td>户外温度上限设定(mpa)</td>
+        		<td>户外温度下限设定</td>
+        		<td>风向设定1A</td>
+        		<td>风向设定1B</td>
+        		<td>风向设定2A</td>
+        		<td>风向设定2B</td>
+
+        		<td>风速设定</td>
+        		<td>test</td>
+        		<td>test</td>
+        		<td>test</td>
+        		<td>test</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+            {volist name="list" id="v"}
+        	<tr>
+                <td>{$v.create_time}</td>
+        		<td>{$v.pmls?'<span style="color:green;">运行</span>':'<span style="color:red;">停止</span>'}</td>
+        		<td>{$v.pmlf?'<span style="color:red;">故障</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$v.p1arth}</td>
+        		<td>{$v.p1c}</td>
+        		<td>{$v.pm2s?'<span style="color:green;">运行</span>':'<span style="color:red;">停止</span>'}</td>
+        		<td>{$v.pm2f?'<span style="color:red;">故障</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$v.p2arth}</td>
+        		<td>{$v.p2c}</td>
+        	
+        		<td>{$v.pv}</td>
+        		<td>{$v.vph?'<span style="color:red;">越限</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$v.ivpl?'<span style="color:red;">越限</span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$v.swa?'<span style="color:red;background-color: red;">  </span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$v.dwa?'<span style="color:red;background-color: red;">  </span>':'<span style="color:green;">正常</span>'}</td>
+        		<td>{$v.llv}</td>
+        		<td>{$v.mrt}</td>
+        		<td>{$v.mrot}</td>
+        
+        		<td>{$v.ituls}</td>
+        		<td>{$v.itdls}</td>
+        		<td>{$v.otuls}</td>
+        		<td>{$v.otdls}</td>
+        		<td>{$v.wdir1a}</td>
+        		<td>{$v.wdir1b}</td>
+        		<td>{$v.wdir2a}</td>
+        		<td>{$v.wdir2a}</td>
+        	
+        		<td>{$v.wss}</td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        		<td></td>
+        	</tr>
+            {/volist}
+        </table>
+        {$page|raw}
+  	</div>
+</div>
+
+
+
+</body>
+<script type="text/javascript">
+	layui.use(['form', 'layedit', 'laydate', 'table'], function(){
+		var form = layui.form
+		,layer   = layui.layer
+		,layedit = layui.layedit
+        ,table   = layui.table
+		,laydate = layui.laydate;
+
+	//监听指定开关
+	form.on('switch(aks)', function(data){
+	});
+	form.on('switch(rm)', function(data){
+	});
+
+    table.init('#table',{
+        height:315
+        ,limit:10
+    });
+
+    // table.render({
+    //     elem: '#table'
+    //     ,height: 312
+    //     ,url: '/demo/table/user/' //数据接口
+    //     ,page: true //开启分页
+    //     ,cols: [[ //表头
+    //       {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+    //       ,{field: 'username', title: '用户名', width:80}
+    //       ,{field: 'sex', title: '性别', width:80, sort: true}
+    //       ,{field: 'city', title: '城市', width:80} 
+    //       ,{field: 'sign', title: '签名', width: 177}
+    //       ,{field: 'experience', title: '积分', width: 80, sort: true}
+    //       ,{field: 'score', title: '评分', width: 80, sort: true}
+    //       ,{field: 'classify', title: '职业', width: 80}
+    //       ,{field: 'wealth', title: '财富', width: 135, sort: true}
+    //     ]]
+    // });
+
+});
+</script>
+</html>

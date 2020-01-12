@@ -1,0 +1,279 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <style type="text/css">
+    body, html {width: 100%;height: 100%;margin:0;font-family:"微软雅黑";font-family:"微软雅黑";}
+    #allmap{width:100%;height:500px;}
+    p{margin-left:5px; font-size:14px;}
+    .BMap_cpyCtrl { display:none; }
+        .anchorBL{ display:none; }
+  </style>
+  <link rel="stylesheet" href="/public/admin/css/font.css">
+	<link rel="stylesheet" href="/public/admin/css/xadmin.css">
+	<script src="/public/admin/lib/layui/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="/public/admin/js/xadmin.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=9vP7wDuMDhTXGKIk1sepMtRWuhYAf0L5"></script>
+</head>
+<body>
+<!-- <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>添加设备</legend>
+</fieldset> -->
+ 
+<form class="layui-form" action="">
+	<div class="layui-form-item">
+		<div class="layui-inline">
+		  <label class="layui-form-label">设备编号</label>
+		  <div class="layui-input-inline">
+		    <input name="plc_id" class="layui-input" type="text" autocomplete="off" value="105" lay-verify="required">
+		  </div>
+		</div>
+		<div class="layui-inline">
+		  <label class="layui-form-label">站点名</label>
+		  <div class="layui-input-inline">
+		    <input name="name" class="layui-input" type="text" autocomplete="off" value="菜鸟" lay-verify="required">
+		  </div>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<div style="width: 20%;float: left;">
+			<label class="layui-form-label">设备经纬度</label>
+			<div class="layui-input-inline">
+			    <input name="lon" disabled="" class="layui-input" value="113.235226" type="text" autocomplete="off" placeholder="设备经度" lay-verify="required">
+			</div>
+			<label class="layui-form-label"></label>
+			<div class="layui-input-inline">
+			    <input name="lat" disabled="" class="layui-input" value="37.125326" type="text" autocomplete="off" placeholder="设备纬度" lay-verify="required">
+			</div>
+		</div>
+		<div id="allmap" style="width: 80%;float: left;"></div>
+	</div>
+<script type="text/javascript">
+// 百度地图API功能
+var mp = new BMap.Map("allmap");
+var point = new BMap.Point(113.665556, 34.752539);
+mp.centerAndZoom(point, 14);
+mp.enableScrollWheelZoom();
+mp.enableInertialDragging();
+mp.enableContinuousZoom();
+
+//创建站点
+// var pt = new BMap.Point(113.665956, 34.765539);
+// var myIcon = new BMap.Icon("/public/admin/lib/layui/images/face/0.gif", new BMap.Size(300,157));
+// var marker2 = new BMap.Marker(pt,{icon:myIcon});  // 创建标注
+// mp.addOverlay(marker2);// 将标注添加到地图中
+
+// 编写自定义函数,创建标注
+function addMarker(point){
+  var marker = new BMap.Marker(point);
+  mp.addOverlay(marker);
+}
+
+
+// // 随机向地图添加25个标注
+// var bounds = mp.getBounds();
+// var sw = bounds.getSouthWest();
+// var ne = bounds.getNorthEast();
+// var lngSpan = Math.abs(sw.lng - ne.lng);
+// var latSpan = Math.abs(ne.lat - sw.lat);
+// for (var i = 0; i < 25; i ++) {
+//   var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
+//   var myIcon = new BMap.Icon("/public/admin/lib/layui/images/face/0.gif", new BMap.Size(300,157));
+//   addMarker(point,{icon:myIcon});
+// }
+
+
+var navigationControl = new BMap.NavigationControl({
+  anchor: BMAP_ANCHOR_TOP_RIGHT,
+  type: BMAP_NAVIGATION_CONTROL_LARGE,
+  enableGeolocation: true
+});
+mp.addControl(navigationControl);
+
+// var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+// var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+// var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT}); 
+// mp.addControl(top_right_navigation);
+
+// 添加定位控件
+// var geolocationControl = new BMap.GeolocationControl();
+// geolocationControl.addEventListener("locationSuccess", function(e){
+//   // 定位成功事件
+//   var address = '';
+//   address += e.addressComponent.province;
+//   address += e.addressComponent.city;
+//   address += e.addressComponent.district;
+//   address += e.addressComponent.street;
+//   address += e.addressComponent.streetNumber;
+//   alert('当前定位');
+// });
+// geolocationControl.addEventListener("locationError",function(e){
+//   alert(e.message);
+// });
+// mp.addControl(geolocationControl);
+
+
+var size = new BMap.Size(10, 20);
+mp.addControl(new BMap.CityListControl({
+    anchor: BMAP_ANCHOR_TOP_LEFT,
+    offset: size,
+    // 切换城市之间事件
+    // onChangeBefore: function(){
+    //    alert('before');
+    // },
+    // 切换城市之后事件
+    // onChangeAfter:function(){
+    //   alert('after');
+    // }
+}));
+
+function initLocation(){
+	var geolocation = new BMap.Geolocation();
+	geolocation.getCurrentPosition(function(r){
+		if(this.getStatus() == BMAP_STATUS_SUCCESS){
+			var mk = new BMap.Marker(r.point);
+			mp.addOverlay(mk);
+			mp.panTo(r.point);
+		}
+		else {
+			alert('failed'+this.getStatus());
+		}
+	},{enableHighAccuracy: true});
+}
+
+initLocation();
+
+mp.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+function showInfo(e){
+	// mp.removeOverlay();
+	mp.clearOverlays();
+	point = new BMap.Point(e.point.lng, e.point.lat);
+	var marker = new BMap.Marker(point);
+	mp.addOverlay(marker);
+	mp.panTo(point);
+$("input[name='lon']").val(e.point.lng);
+$("input[name='lat']").val(e.point.lat);
+}
+mp.addEventListener("click", showInfo);
+
+</script>
+	<div class="layui-form-item">
+		<div class="layui-inline">
+	      <label class="layui-form-label">选择气象仪</label>
+	      <div class="layui-input-inline">
+	        <select name="wea_id" lay-search="" lay-verify="required">
+	          <option value="">直接选择或搜索选择</option>
+	          {volist name='wea_list' id='v'}
+	          <option value="{$v.wea_id}" checked="">{$v.wea_id}:{$v.name}</option>
+	          {/volist}
+	        </select>
+	      </div>
+	    </div>
+		<div class="layui-inline">
+		  <label class="layui-form-label">模式</label>
+		    <div class="layui-input-block">
+		      <input name="model" title="智能" type="radio" checked="" value="2">
+		      <input name="model" title="手动" type="radio" value="0">
+		      <input name="model" title="定时" type="radio" value="1">
+		</div>
+		<input type="hidden" name="type" value="1">
+  </div>
+	</div>
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" type="submit" lay-filter="demo1" lay-submit="">立即提交</button>
+      <button class="layui-btn layui-btn-primary" id="reset" type="reset">重置</button>
+    </div>
+  </div>
+</form>
+<script>
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  // ,layedit = layui.layedit
+  // ,laydate = layui.laydate;
+  
+  //日期
+  // laydate.render({
+  //   elem: '#date'
+  // });
+  // laydate.render({
+  //   elem: '#date1'
+  // });
+  
+  //创建一个编辑器
+  // var editIndex = layedit.build('LAY_demo_editor');
+ 
+  //自定义验证规则
+  form.verify({
+    plc_id: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+    }
+    // ,lon: [
+    //   /^[\S]{6,12}$/
+    //   ,'密码必须6到12位，且不能出现空格'
+    // ]
+    ,name: function(value){
+      if(value.length < 5){
+        return '标题至少得5个字符啊';
+      }
+      // layedit.sync(editIndex);
+    }
+  });
+  
+  //监听指定开关
+  form.on('switch(switchTest)', function(data){
+    layer.msg('开关checked：'+ (this.checked ? 'true' : 'false'), {
+      offset: '6px'
+    });
+    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+  });
+  
+  //监听提交
+  form.on('submit(demo1)', function(data){
+  	delete data.field.wd;
+    layer.alert(JSON.stringify(data.field), {
+      title: '最终的提交信息'
+    })
+    layer.alert('最终提交信息', {
+	   time: 0 //不自动关闭
+	  ,btn: ['确定', '取消']
+	  ,title:'最终提交信息'
+	  ,content:JSON.stringify(data.field)
+	  ,yes: function(index){
+	    layer.close(index);
+	    $.ajax({
+	    	url:'{:url("admin/plc/dev")}',
+	    	data:data.field,
+	    	dataType:'JSON',
+	    	success:function(res){
+	    		if (res.code == 200) {
+	    			layer.alert('成功');
+	    		}else{
+	    			layer.alert('失败');
+	    		}
+	    	}
+	    });
+	  }
+	});
+    return false;
+  });
+ 
+  //表单取值
+  // layui.$('#LAY-component-form-getval').on('click', function(){
+  //   var data = form.val('example');
+  //   alert(JSON.stringify(data));
+  // });
+  
+});
+</script>
+
+</body>
+</html>
