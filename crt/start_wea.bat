@@ -1,1 +1,0 @@
-php Applications\p\start_register.php Applications\p\start_p.php Applications\p\start_businessworker.php
